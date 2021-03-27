@@ -14,7 +14,6 @@ describe('replaceLetterOnIndex', () => {
         expect(replaceLetterOnIndex('hello', 1, 'i')).toEqual('hillo');
     });
     test('Replace letter on index not existing on string', () => {
-        console.log(replaceLetterOnIndex('', 1, 'i'));
         expect(replaceLetterOnIndex('', 1, 'i')).toEqual('');
     });
 });
