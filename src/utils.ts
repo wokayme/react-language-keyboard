@@ -1,7 +1,7 @@
 export const addKeyToLetterArray = (
     letterDictionary: Record<string, string[]>
 ): Record<string, string[]> =>
-    Object.keys(letterDictionary).reduce((memo, key) => {
+    Object.keys(letterDictionary).reduce<Record<string, string[]>>((memo, key) => {
         memo[key] = [key, ...letterDictionary[key]];
         return memo;
     }, {});
@@ -12,7 +12,7 @@ export const setCaretPosition = (event: KeyboardEvent, caretPosition: number): v
 };
 
 export const getCaretPosition = (event: KeyboardEvent): number => {
-    return (event.target as HTMLInputElement).selectionStart - 1;
+    return ((event.target as HTMLInputElement).selectionStart || 0) - 1;
 };
 
 export const replaceLetterOnIndex = (

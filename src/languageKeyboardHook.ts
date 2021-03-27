@@ -6,10 +6,10 @@ import {
     getCaretPosition
 } from './utils';
 
-let holdTimeout;
-let letterChangeInterval;
-let hold;
-let clickedLetter;
+let holdTimeout: NodeJS.Timeout | undefined;
+let letterChangeInterval: NodeJS.Timeout | undefined;
+let hold: boolean;
+let clickedLetter: string;
 const waitForLetter = 200;
 
 const handleOnInput = () => {
@@ -22,7 +22,7 @@ const preventPuttingMoreLettersWhenKeyIsHolded = (event: KeyboardEvent) => {
     event.preventDefault();
 };
 
-const handleKeyDown = (letterDictionary) => (event: KeyboardEvent) => {
+const handleKeyDown = (letterDictionary: Record<string, string[]>) => (event: KeyboardEvent) => {
     if (hold) {
         preventPuttingMoreLettersWhenKeyIsHolded(event);
     }
@@ -49,30 +49,30 @@ const handleKeyDown = (letterDictionary) => (event: KeyboardEvent) => {
 };
 
 const handleKeyUp = () => {
-    clearTimeout(holdTimeout);
-    clearInterval(letterChangeInterval);
+    if (holdTimeout) {
+        clearTimeout(holdTimeout);
+    }
+    if (letterChangeInterval) {
+        clearInterval(letterChangeInterval);
+    }
     hold = false;
     letterChangeInterval = undefined;
 };
 
 export const useLanguageKeyboard = (
     letterDictionary: Record<string, string[]> = {}
-): React.MutableRefObject<HTMLInputElement> => {
+): React.MutableRefObject<HTMLInputElement | null> => {
     const letterReplacableDictionary = useMemo(() => addKeyToLetterArray(letterDictionary), []);
 
     const htmlElementRef = useRef<HTMLInputElement>(null);
     useEffect(() => {
         if (htmlElementRef.current) {
-            const handleKeyDownCached = handleKeyDown(letterReplacableDictionary);
             htmlElementRef.current.addEventListener('input', handleOnInput);
-            htmlElementRef.current.addEventListener('keydown', handleKeyDownCached);
+            htmlElementRef.current.addEventListener(
+                'keydown',
+                handleKeyDown(letterReplacableDictionary)
+            );
             htmlElementRef.current.addEventListener('keyup', handleKeyUp);
-
-            return () => {
-                htmlElementRef.current.removeEventListener('input', handleOnInput);
-                htmlElementRef.current.removeEventListener('keydown', handleKeyDownCached);
-                htmlElementRef.current.removeEventListener('keyup', handleKeyUp);
-            };
         }
     }, [htmlElementRef]);
 
