@@ -1,10 +1,11 @@
-import { useEffect, useRef, useMemo } from 'react';
+import { useEffect, useRef, useMemo, useContext } from 'react';
 import {
     addKeyToLetterArray,
     replaceLetterOnIndex,
     setCaretPosition,
     getCaretPosition
 } from './utils';
+import { ReactLanguageKeyboardContext } from './languageKeyboardProvider';
 
 let holdTimeout: NodeJS.Timeout | undefined;
 let letterChangeInterval: NodeJS.Timeout | undefined;
@@ -62,7 +63,17 @@ const handleKeyUp = () => {
 export const useLanguageKeyboard = (
     letterDictionary: Record<string, string[]> = {}
 ): React.MutableRefObject<HTMLInputElement | null> => {
-    const letterReplacableDictionary = useMemo(() => addKeyToLetterArray(letterDictionary), []);
+    const { letterDictionary: letterDictionaryFromContext } = useContext(
+        ReactLanguageKeyboardContext
+    );
+
+    const letterReplacableDictionary = useMemo(
+        () =>
+            Object.keys(letterDictionary).length > 0
+                ? addKeyToLetterArray(letterDictionary)
+                : letterDictionaryFromContext,
+        [letterDictionary, letterDictionaryFromContext]
+    );
 
     const htmlElementRef = useRef<HTMLInputElement>(null);
     useEffect(() => {
