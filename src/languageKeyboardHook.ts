@@ -26,8 +26,9 @@ const preventPuttingMoreLettersWhenKeyIsHolded = (event: KeyboardEvent) => {
 const handleKeyDown = (letterDictionary: Record<string, string[]>) => (event: KeyboardEvent) => {
     if (hold) {
         preventPuttingMoreLettersWhenKeyIsHolded(event);
+    } else {
+        clickedLetter = event.key;
     }
-    clickedLetter = event.key;
     const value = (event.target as HTMLInputElement).value;
     const caretPosition = getCaretPosition(event);
     const isLetterReplacable = letterDictionary[clickedLetter];
