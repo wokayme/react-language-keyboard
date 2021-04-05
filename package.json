@@ -1,6 +1,6 @@
 {
   "name": "react-language-keyboard",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Add language support on your website to every keyboard on desktop device",
   "keywords": ["language", "keyboard", "language keyboard", "react", "multilanguage","key binding", "letter replacment"],
   "main": "./build/index.js",
@@ -35,7 +35,8 @@
     "eslint": "eslint src/**",
     "test": "jest --collectCoverage",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook -o docs"
+    "build-storybook": "build-storybook -o docs",
+    "npm:publish": "npm run build && npm publish --access=public"
   },
   "repository": {
     "type": "git",
