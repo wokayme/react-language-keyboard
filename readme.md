@@ -1,4 +1,4 @@
-#React-language-keyboard
+# React-language-keyboard
 [![npm version](https://badge.fury.io/js/react-language-keyboard.svg)](https://badge.fury.io/js/react-language-keyboard) ![ts](https://badgen.net/badge/Built%20With/TypeScript/blue)
 
 Add language support on your website to every keyboard on desktop device
