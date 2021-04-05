@@ -6,13 +6,7 @@ let hold: boolean;
 let clickedLetter: string;
 const waitForLetter = 500;
 
-// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-export const handleOnInput = (event: Event) => {
-    if (clickedLetter !== (event as KeyboardEvent).key) {
-        handleKeyUp();
-    }
-
+export const handleOnInput = (): void => {
     holdTimeout = setTimeout(function () {
         hold = true;
     }, waitForLetter);
@@ -25,7 +19,7 @@ export const preventPuttingMoreLettersWhenKeyIsHolded = (event: KeyboardEvent): 
 export const handleKeyDown = (letterDictionary: Record<string, string[]>) => (
     event: KeyboardEvent
 ): void => {
-    if (hold) {
+    if (clickedLetter === event.key) {
         preventPuttingMoreLettersWhenKeyIsHolded(event);
     } else {
         clickedLetter = event.key;
@@ -60,4 +54,5 @@ export const handleKeyUp = (): void => {
     }
     hold = false;
     letterChangeInterval = undefined;
+    clickedLetter = '';
 };

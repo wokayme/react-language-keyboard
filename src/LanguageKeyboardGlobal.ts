@@ -9,7 +9,7 @@ interface LanguageKeyboardGlobalProps {
 
 const inputEvent = (selector: string[]) => (e: Event) => {
     if (selector.includes((e.target as HTMLElement).tagName)) {
-        handleOnInput(e);
+        handleOnInput();
     }
 };
 
