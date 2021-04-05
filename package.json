@@ -1,6 +1,6 @@
 {
   "name": "react-language-keyboard",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Add language support on your website to every keyboard on desktop device",
   "keywords": ["language", "keyboard", "language keyboard", "react", "multilanguage","key binding", "letter replacment"],
   "main": "./build/index.js",
