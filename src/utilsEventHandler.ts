@@ -4,7 +4,7 @@ let holdTimeout: NodeJS.Timeout | undefined;
 let letterChangeInterval: NodeJS.Timeout | undefined;
 let hold: boolean;
 let clickedLetter: string;
-const waitForLetter = 200;
+const waitForLetter = 500;
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
