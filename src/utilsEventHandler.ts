@@ -32,15 +32,28 @@ export const handleKeyDown = (letterDictionary: Record<string, string[]>) => (
     if (hold && isLetterReplacable && isReplaceIntervalNotDefined) {
         let currentIndex = 0;
         letterChangeInterval = setInterval(function () {
-            (event.target as HTMLInputElement).value = replaceLetterOnIndex(
+            const newValue = replaceLetterOnIndex(
                 value,
                 caretPosition,
                 letterDictionary[clickedLetter][currentIndex]
             );
+            (event.target as HTMLInputElement).value = newValue;
 
             currentIndex =
                 letterDictionary[clickedLetter].length <= currentIndex + 1 ? 0 : currentIndex + 1;
             setCaretPosition(event, caretPosition);
+
+            const newevent = new Event('input', { bubbles: true });
+
+            const tracker = ((event.target as unknown) as {
+                _valueTracker: { setValue: (target: EventTarget) => void };
+            })?._valueTracker;
+
+            if (tracker && event.target !== null) {
+                tracker.setValue(event.target);
+            }
+
+            event.target?.dispatchEvent(newevent);
         }, waitForLetter);
     }
 };
