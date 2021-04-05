@@ -1,13 +1,12 @@
 {
-  "name": "reactlanguagekeyboard",
-  "version": "1.0.0",
+  "name": "react-language-keyboard",
+  "version": "0.0.3",
   "description": "",
   "main": "./build/index.js",
   "types": "./build/index.d.ts",
   "dependencies": {
     "react": "^17.0.1",
-    "react-dom": "^17.0.1",
-    "undefined": "^0.1.0"
+    "react-dom": "^17.0.1"
   },
   "devDependencies": {
     "eslint": "^7.22.0",
@@ -35,7 +34,7 @@
     "eslint": "eslint src/**",
     "test": "jest --collectCoverage",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "build-storybook": "build-storybook -o docs"
   },
   "repository": {
     "type": "git",
