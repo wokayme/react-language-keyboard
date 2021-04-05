@@ -33,7 +33,7 @@ const SpanishKeyBoard = {
 
 // Use in your react app
 const App = ()=>{
-	return <>
+    return <>
 		<LanguageKeyboardGlobal letterDictionary={SpanishKeyBoard} />
 		<input />
 	</>
@@ -59,7 +59,7 @@ const SpanishKeyBoard = {
 
 // Use in your component
 const Component = ()=>{
-	const htmlInput = useLanguageKeyboard(SpanishKeyBoard);
+    const htmlInput = useLanguageKeyboard(SpanishKeyBoard);
     return <input ref={htmlInput} />
 }
 ```
@@ -90,7 +90,7 @@ const App = ()=>{
 
 
 const Component = ()=>{
-	// component automaticly has access to Spanish Keyboard context
+    // component automaticly has access to Spanish Keyboard context
     const htmlInput = useLanguageKeyboard();
     return <input ref={htmlInput} />
 }
